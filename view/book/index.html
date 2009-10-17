@@ -1,0 +1,60 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>{{ book.title }} - Bunco</title>
+    <link rel="stylesheet" href="/public/stylesheet/application.css" />
+    <script type="text/javascript" src="/js/jquery.js" ></script>
+    <script type="text/javascript">
+      $(function() {
+        $("#delete").submit(function() {
+           $.ajax({
+             type: "DELETE",
+             url: this.action,
+             success: function() {
+               location.href = "/";
+             },
+             error: function() {
+               alert("エラーです(エラー処理をしてください)");
+             },
+           });
+           return false;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>{{ book.title }}</h1>
+    <table>
+      <tr>
+        <td>isbn</td>
+        <td>{{ book.isbn }}</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>{{ book.title }}</td>
+      </tr>
+      <tr>
+        <td>author</td>
+        <td>{{ book.author }}</td>
+      </tr>
+      <tr>
+        <td>publisher</td>
+        <td>{{ book.publisher }}</td>
+      </tr>
+      <tr>
+        <td>published_at</td>
+        <td>{{ book.published_at }}</td>
+      </tr>
+      <tr>
+        <td>created_at</td>
+        <td>{{ book.created_at }}</td>
+      </tr>
+    </table>
+
+    <form action="{{ book.path }}" method="POST" id="delete">
+      <input type="submit" value="delete this book" />
+    </form>
+    <a href="/" >index</a>
+  </body>
+</html>
+
