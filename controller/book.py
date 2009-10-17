@@ -46,14 +46,14 @@ class BookPage(webapp.RequestHandler):
         book = Book(
             key_name = "Book_" + self.request.get('isbn'),
             isbn = self.request.get('isbn'),
-            title = self.request.get('title'),
-            author = self.request.get('author'),
-            publisher = self.request.get('publisher'),
             )
-        book.published_at = datetime.date.today() # XXX
+        try:
+            book.build_from_isbn()
+        except CantBuildBook:
+            self.redirect('/')
         book.put()
         self.redirect(book.path())
-    
+
     def put(self, key):
         return
     def delete(self, key):
@@ -62,3 +62,4 @@ class BookPage(webapp.RequestHandler):
             book.delete()
         self.response.out.write("ok")
         return
+
