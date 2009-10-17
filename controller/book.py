@@ -7,7 +7,8 @@ import os
 from google.appengine.ext.webapp import template
 import logging
 import datetime
- 
+from model.book import CantBuildBook
+
 class BookPage(webapp.RequestHandler):
     def get(self, key):
 
@@ -24,7 +25,7 @@ class BookPage(webapp.RequestHandler):
         else:
             greeting = ("<a href=\"%s\">Sign in or register</a>." %
                         users.create_login_url("/"))
-        
+
         logging.info("cache not hit()")
         book = Book.get_by_key_name("Book_" + key)
         if book:
@@ -51,6 +52,7 @@ class BookPage(webapp.RequestHandler):
             book.build_from_isbn()
         except CantBuildBook:
             self.redirect('/')
+            return
         book.put()
         self.redirect(book.path())
 

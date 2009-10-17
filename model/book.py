@@ -4,7 +4,6 @@ from google.appengine.api import urlfetch
 import yaml
 from datetime import date
 
-
 class CantBuildBook(Exception):
      def __init__(self, value):
          self.value = value
@@ -27,7 +26,7 @@ class Book(db.Model):
         result = urlfetch.fetch(url)
 
         if result.status_code != 200:
-            raise CantBuildBook
+            raise CantBuildBook, 'Maybe, invalid ISBN'
 
         info = yaml.load(result.content)['ItemAttributes']
 
