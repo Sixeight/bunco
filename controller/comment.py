@@ -25,10 +25,11 @@ class CommentPage(webapp.RequestHandler):
     def post(self):
         book = Book.get_by_key_name("Book_" + self.request.get('book'))
         if not book: return
-        
+        body = self.request.get('body')
+        if not body: return
         comment = Comment(
             book = book,
-            body = self.request.get('body'),
+            body = body
             )
         comment.put()
         user = users.get_current_user()

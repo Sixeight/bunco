@@ -31,12 +31,14 @@ $(function() {
 
         $(".post-comment", from).submit(function() {
             var self = this;
+            if ( !this.body.value.length ) return false;
             $(".submit", self)[0].disabled = true;
             $.ajax({
                 type: self.method,
                 url: self.action,
                 data: $(self).serialize(),
                 success: function(res) {
+                    if (!res.length) return;
                     var item = $("<li>").html(res);
                     $(".comments").append(item);
                     self.body.value = "";
