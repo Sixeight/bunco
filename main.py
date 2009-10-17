@@ -5,6 +5,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 # from controller.api import WordPage,WordsPage
 from controller.index import IndexPage
 from controller.book import BookPage
+from controller.comment import CommentPage
 
 application = webapp.WSGIApplication(
   [
@@ -13,6 +14,8 @@ application = webapp.WSGIApplication(
     ('/', IndexPage),
     ('/book', BookPage),
     (r'/book/(.*)', BookPage),
+    ('/comment', CommentPage),
+    (r'/comment/(.*)', CommentPage),
     ],
   debug=True)
  
