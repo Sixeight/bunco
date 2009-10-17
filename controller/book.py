@@ -58,9 +58,11 @@ class BookPage(webapp.RequestHandler):
 
     def put(self, key):
         return
+
     def delete(self, key):
         book = Book.get_by_key_name("Book_" + key)
         if book:
+            for comment in book.comments: comment.delete()
             book.delete()
         self.response.out.write("ok")
         return
