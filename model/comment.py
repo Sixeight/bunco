@@ -11,3 +11,9 @@ class Comment(db.Model):
 
     def path(self):
         return "/comment/" + str(self.key())
+
+    def each_line_body(self):
+        return self.body.split("\n")
+
+    def unko(self):
+        return "oisii"

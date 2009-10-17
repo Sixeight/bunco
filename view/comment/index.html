@@ -1,0 +1,16 @@
+<div class="comment">
+  <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
+  <span class="timestamp">{{ comment.created_at|escape}}</span>
+  <pre>
+    {% for line in comment.each_line_body %}
+    {{ line|escape}}
+    {% endfor %}
+  </pre>
+  {% ifequal user comment.author %}
+  <span>
+    <form action="{{ comment.path }}" method="POST" class="delete-comment">
+      <input type="submit" value="delete">
+    </form>
+  </span>
+  {% endifequal %}
+</div>

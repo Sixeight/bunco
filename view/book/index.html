@@ -4,37 +4,7 @@
     <title>{{ book.title|escape}} - Bunco</title>
     <link rel="stylesheet" href="/public/stylesheet/application.css" />
     <script type="text/javascript" src="/js/jquery.js" ></script>
-    <script type="text/javascript">
-      $(function() {
-        $("#delete-book").submit(function() {
-           $.ajax({
-             type: "DELETE",
-             url: this.action,
-             success: function() {
-               location.href = "/";
-             },
-             error: function() {
-               alert("エラーです(エラー処理を実装するよう管理者に頼んでください)");
-             },
-           });
-           return false;
-        });
-        $(".delete-comment").submit(function() {
-          var self = this;
-           $.ajax({
-             type: "DELETE",
-             url: this.action,
-             success: function() {
-               $(self.parentNode.parentNode.parentNode).remove();
-             },
-             error: function() {
-               alert("エラーです(エラー処理を実装するよう管理者に頼んでください)");
-             },
-           });
-           return false;
-        });
-      });
-    </script>
+    <script type="text/javascript" src="/js/bookpage.js" ></script>
   </head>
   <body>
     {{greeting}}
@@ -67,28 +37,18 @@
       </tr>
     </table>
     <h2>Comment</h2>
-    <ul>
+    <ul class="comments">
       {% for comment in book.comments %}
       <li>
-        <div class="comment">
-          <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
-          <span class="timestamp">{{ comment.created_at|escape}}</span>
-          <span class="body">{{ comment.body|escape}}</span>
-          {% ifequal user comment.author %}
-          <span>
-            <form action="{{ comment.path }}" method="POST" class="delete-comment">
-              <input type="submit" value="delete">
-            </form>
-          </span>
-          {% endifequal %}
+        {% include "../comment/index.html" %}
       </li>
       {% endfor %}
     </ul>
 
-    <form action="/comment" method="POST">
+    <form action="/comment" method="POST" class="post-comment">
       <textarea name="body"></textarea>
       <input type="hidden" name="book" value="{{book.isbn|escape}}" />
-      <input type="submit" value="Post" />
+      <input type="submit" value="Post" class="submit"/>
     </form>
     <h2>Delete</h2>
     <form action="{{ book.path|escape}}" method="POST" id="delete-book">
