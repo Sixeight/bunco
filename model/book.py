@@ -9,6 +9,6 @@ class Book(db.Model):
     published_at = db.DateProperty()
     created_at = db.DateTimeProperty(auto_now_add=True)
 
-  def path(self):
-    return "/book/" + self.isbn
+    def path(self):
+      return "/book/" + self.isbn
 
