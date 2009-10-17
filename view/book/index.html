@@ -71,16 +71,16 @@
       {% for comment in book.comments %}
       <li>
         <div class="comment">
-        <span class="username">{{ comment.author|escape}}</span>
-        <span class="timestamp">{{ comment.created_at|escape}}</span>
-        <span class="body">{{ comment.body|escape}}</span>
-        {% ifequal user comment.author %}
-        <span>
-          <form action="{{ comment.path }}" method="POST" class="delete-comment">
-            <input type="submit" value="delete">
-          </form>
-        </span>
-        {% endifequal %}
+          <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
+          <span class="timestamp">{{ comment.created_at|escape}}</span>
+          <span class="body">{{ comment.body|escape}}</span>
+          {% ifequal user comment.author %}
+          <span>
+            <form action="{{ comment.path }}" method="POST" class="delete-comment">
+              <input type="submit" value="delete">
+            </form>
+          </span>
+          {% endifequal %}
       </li>
       {% endfor %}
     </ul>
