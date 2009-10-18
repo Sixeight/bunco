@@ -6,11 +6,25 @@
   </head>
   <body>
     <h1>Bunco</h1>
-    <ul>
+    <table>
       {% for book in books %}
-      <li><a href="{{ book.path }}">{{ book.title }} by {{ book.author }}</a></li>
+      <tr>
+        <td>
+          <a href="http://amazon.jp/dp/{{ book.isbn }}">
+            <img src="http://images-jp.amazon.com/images/P/{{ book.isbn }}.09._SCLMZZZZZZ_PA30,0,0,30_SY300_.jpg" />
+          </a>
+        </td>
+        <td>
+          <table>
+            <tr><td><a href="{{ book.path }}">{{ book.title }}</a><td></tr>
+            <tr><td>{{ book.author }}</td></tr>
+            <tr><td>{{ book.publisher }}</td></tr>
+            <tr><td>{{ book.published_at }}</td></tr>
+          </table>
+        </td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
 
     <h1>Post</h1>
     <form action="/book" method="POST">
