@@ -74,8 +74,9 @@ class BookPage(webapp.RequestHandler):
 
 
     def delete(self, key):
-        # FIXME: please hack
-        return
+        # FIXME: dirty
+        if not users.is_current_user_admin():
+            return
         book = Book.get_by_key_name("Book_" + key)
         if book:
             for comment in book.comments: comment.delete()
