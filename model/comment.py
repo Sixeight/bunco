@@ -15,6 +15,6 @@ class Comment(db.Model):
     def each_line_body(self):
         return self.body.split("\n")
 
-    def is_author(self):
+    def is_owner(self):
         return self.author in [stock.owner for stock in self.book.stocks]
 
