@@ -10,11 +10,12 @@
   <body>
     {{greeting}}
     <h1>Bunco</h1>
+    <p>Buncoは町家文庫です．</p>
     <table>
       {% for book in books %}
       <tr class="book">
         <td>
-          <a href="{{ book.amazon_path }}"><img src="{{ book.image_path }}" /></a>
+          <a href="{{ book.path }}"><img src="{{ book.image_path }}" /></a>
         </td>
         <td>
           <table>
@@ -29,13 +30,13 @@
     </table>
 
     {% if user %}
-    <h1>Post</h1>
+    <h1>本を追加</h1>
     <form action="/book" method="POST">
       <table>
-        <tr><td>isbn </td><td><input type="text" name="isbn"></td></tr>
+        <tr><th>ISBN</th><td><input type="text" name="isbn"></td></tr>
       </table>
       <!-- <p>published_at <input type="text" name="published_at"></p> -->
-      <p><input type="submit" value="Create"></p>
+      <p><input type="submit" value="追加"></p>
     </form>
     {% endif %}
   </body>

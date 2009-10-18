@@ -13,16 +13,12 @@
     <h1>{{ book.title|escape}}</h1>
     <table>
       <tr>
-        <td><a href="{{ book.amazon_path }}"><img src="{{ book.large_image_path }}" /></a></td>
+        <td><img src="{{ book.large_image_path }}" /></td>
         <td>
           <table>
             <tr>
               <td>ISBN</td>
               <td>{{ book.isbn|escape}}</td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>{{ book.title|escape}}</td>
             </tr>
             <tr>
               <td>Author</td>
@@ -47,7 +43,7 @@
               </td>
             </tr>
             <tr>
-              <td>在庫数</td>
+              <td>在庫</td>
               {% ifequal 0 book.occupied_stocks.count %}
               <td>{{ book.available_stocks.count }}</td>
               {% else %}
@@ -69,6 +65,7 @@
         </td>
       </tr>
     </table>
+    <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
     <h2>貸し借り</h2>
     <form action="{{ book.path|escape}}" method="POST" id="lent-book">
       <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
