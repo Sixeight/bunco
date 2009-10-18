@@ -10,9 +10,10 @@ STATUS = {0: u'在庫あり',
 class BookStatus(db.Model):
     book = db.ReferenceProperty(Book,
         required=True, collection_name='statuses')
-    user = users.User()
+    owner = db.UserProperty(auto_current_user_add=True)
     modified_add = db.DateTimeProperty(auto_now_add=True,auto_now=True)
-    status = db.IntegerProperty()       # STATUS, 0~2
+    user = users.User()
+    status = db.IntegerProperty(required=True, choices=set(STATUS.keys()))
 
     def __unicode__(self):
         return STATUS[self.status]
