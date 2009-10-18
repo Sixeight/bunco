@@ -64,5 +64,9 @@ class Book(db.Model):
         except Exception:
             raise CantBuildBook, 'Unknown Error'
 
-    def stock_number(self):
-         return self.statuses.filter('status = ', 0).count()
+    def available_stocks(self):
+         return self.stocks.filter('status = ', 'available')
+
+    def occupied_stocks(self):
+         return self.stocks.filter('status = ', 'occupied')
+

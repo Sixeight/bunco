@@ -37,16 +37,22 @@
               <td>{{ book.published_at|escape}}</td>
             </tr>
             <tr>
-              <td>Created_at</td>
-              <td>{{ book.created_at|escape}}</td>
+              <td>提供者</td>
+              <td>
+                <ul>
+                  {% for stock in book.stocks %}
+                  <li>{{stock.owner}} at {{stock.created_at}}</li>
+                  {% endfor %}
+                </ul>
+              </td>
             </tr>
             <tr>
               <td>冊数</td>
-              <td>{{ book.statuses.count }}</td>
+              <td>{{ book.stocks.count }}</td>
             </tr>
             <tr>
               <td>在庫数</td>
-              <td>{{ book.stock_number }}</td>
+              <td>{{ book.available_stocks.count }}</td>
             </tr>
           </table>
         </td>

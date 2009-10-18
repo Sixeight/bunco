@@ -1,7 +1,7 @@
 
 from google.appengine.ext import webapp
 from model.book import Book
-from model.book_status import BookStatus
+from model.stock import Stock
 # from google.appengine.api import memcache
 from google.appengine.api import users
 import os
@@ -55,8 +55,7 @@ class BookPage(webapp.RequestHandler):
             self.redirect('/')
             return
         book.put()
-        BookStatus(book=book, user=users.get_current_user(),
-                   status=0).put()
+        Stock(book=book).put()
         self.redirect(book.path())
 
     def put(self, key):

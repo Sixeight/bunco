@@ -1,6 +1,6 @@
 <div class="comment">
   <span class="header">
-    <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
+    <span class="username{% if comment.is_author %} owner{% endif %}">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
     <span class="timestamp">
       <a href={{ comment.path }}>
         {{ comment.created_at|escape}}
