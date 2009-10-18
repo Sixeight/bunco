@@ -45,6 +45,9 @@ class BookPage(webapp.RequestHandler):
 
 
     def post(self):
+        # FIXME: need exception
+        if not users.get_current_user():
+            return
         book = Book(
             key_name = "Book_" + self.request.get('isbn'),
             isbn = self.request.get('isbn'),
@@ -71,6 +74,8 @@ class BookPage(webapp.RequestHandler):
 
 
     def delete(self, key):
+        # FIXME: please hack
+        return
         book = Book.get_by_key_name("Book_" + key)
         if book:
             for comment in book.comments: comment.delete()

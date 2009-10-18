@@ -8,6 +8,7 @@
 
   </head>
   <body>
+    {{greeting}}
     <h1>Bunco</h1>
     <table>
       {% for book in books %}
@@ -27,6 +28,7 @@
       {% endfor %}
     </table>
 
+    {% if user %}
     <h1>Post</h1>
     <form action="/book" method="POST">
       <table>
@@ -35,6 +37,7 @@
       <!-- <p>published_at <input type="text" name="published_at"></p> -->
       <p><input type="submit" value="Create"></p>
     </form>
+    {% endif %}
   </body>
 </html>
 

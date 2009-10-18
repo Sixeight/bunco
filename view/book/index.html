@@ -87,10 +87,13 @@
       <input type="hidden" name="book" value="{{book.isbn|escape}}" />
       <input type="submit" value="Post" class="submit"/>
     </form>
+
+    {% if 0 %}
     <h2>Delete</h2>
     <form action="{{ book.path|escape}}" method="POST" id="delete-book">
       <input type="submit" value="delete this book" />
     </form>
+    {% endif %}
     <a href="/" >index</a>
   </body>
 </html>

@@ -4,6 +4,7 @@ from model.book import Book
 # from google.appengine.api import memcache
 import os
 from google.appengine.ext.webapp import template
+from google.appengine.api import users
 import logging
 
 class IndexPage(webapp.RequestHandler):
@@ -12,7 +13,17 @@ class IndexPage(webapp.RequestHandler):
         result = False
         if not result:
             logging.info("cache not hit(index)")
+            user = users.get_current_user()
+            if user:
+                greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
+                            (user.nickname(), users.create_logout_url("/")))
+            else:
+                greeting = ("<a href=\"%s\">Sign in or register</a>." %
+                            users.create_login_url("/"))
+
             template_values = {
+                'greeting': greeting,
+                'user': user,
                 'books': Book.all().fetch(1000)
                 }
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'index.html')
