@@ -3,18 +3,21 @@
   <head>
     <title>Bunco</title>
     <link rel="stylesheet" href="/public/stylesheet/application.css" />
+    <script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+    <script type="text/javascript" src="/js/index.js" ></script>
+
   </head>
   <body>
     <h1>Bunco</h1>
     <table>
       {% for book in books %}
-      <tr>
+      <tr class="book">
         <td>
           <a href="{{ book.amazon_path }}"><img src="{{ book.image_path }}" /></a>
         </td>
         <td>
           <table>
-            <tr><td><a href="{{ book.path }}">{{ book.title }}</a><td></tr>
+            <tr><td><span class="title"><a href="{{ book.path }}">{{ book.title }}</a></span></td></tr>
             <tr><td>{{ book.author }}</td></tr>
             <tr><td>{{ book.publisher }}</td></tr>
             <tr><td>{{ book.published_at }}</td></tr>

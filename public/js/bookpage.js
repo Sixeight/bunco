@@ -59,3 +59,19 @@ $(function() {
     };
     bindform();
 });
+
+Hatena.Star.Token = 'dfe73460b07ea3bf681104e615d5ecd85df02e2e';
+Hatena.Star.SiteConfig = {
+    entryNodes: {
+        'div.comment': {
+            uri: 'span.timestamp a',
+            title: 'span.username',
+            container: 'span.header'
+        },
+        'h1': {
+            uri: 'window.location',
+            title: 'parent',
+            container: 'parent'
+        }
+    }
+};

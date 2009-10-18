@@ -1,6 +1,12 @@
 <div class="comment">
-  <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
-  <span class="timestamp">{{ comment.created_at|escape}}</span>
+  <span class="header">
+    <span class="username">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
+    <span class="timestamp">
+      <a href={{ comment.path }}>
+        {{ comment.created_at|escape}}
+      </a>
+    </span>
+  </span>
   <pre>
     {% for line in comment.each_line_body %}
     {{ line|escape}}
