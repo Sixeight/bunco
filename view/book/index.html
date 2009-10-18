@@ -41,7 +41,7 @@
               <td>
                 <ul>
                   {% for stock in book.stocks %}
-                  <li>[{{stock.owner}} at {{stock.created_at}}</li>
+                  <li>{{stock.owner}} at {{stock.created_at}}</li>
                   {% endfor %}
                 </ul>
               </td>
