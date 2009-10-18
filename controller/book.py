@@ -59,7 +59,14 @@ class BookPage(webapp.RequestHandler):
         self.redirect(book.path())
 
     def put(self, key):
+        book = Book.get_by_key_name("Book_" + key)
+        if not book:
+            self.response.out.write("ng")
+            return
+        if book.available_stocks().count() > 0:
+            book.available_stocks().fetch(1000).pop().lent()
         return
+
 
     def delete(self, key):
         book = Book.get_by_key_name("Book_" + key)

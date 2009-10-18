@@ -15,6 +15,11 @@ class Stock(db.Model):
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now=True)
 
+    def lent(self):
+        self.status = 'occupied'
+        self.put()
+        return self
+
     def __unicode__(self):
         return STATUS[self.status]
 

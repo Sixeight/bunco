@@ -41,7 +41,7 @@
               <td>
                 <ul>
                   {% for stock in book.stocks %}
-                  <li>{{stock.owner}} at {{stock.created_at}}</li>
+                  <li>[{{stock.owner}} at {{stock.created_at}}</li>
                   {% endfor %}
                 </ul>
               </td>
@@ -58,6 +58,10 @@
         </td>
       </tr>
     </table>
+    <h2>借りる</h2>
+    <form action="{{ book.path|escape}}" method="POST" id="lent-book">
+      <input type="submit" value="借りる" />
+    </form>
     <h2>Comment</h2>
     <ul class="comments">
       {% for comment in book.comments %}

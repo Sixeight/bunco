@@ -1,6 +1,19 @@
 $(function() {
     var bindform = function(from) {
         if (!from) from = document;
+        $("#lent-book", from).submit(function() {
+            $.ajax({
+                type: "PUT",
+                url: this.action,
+                success: function() {
+                    location.reload();
+                },
+                error: function() {
+                    alert("エラーです(エラー処理を実装するよう管理者に頼んでください)");
+                }
+            });
+            return false;
+        });
         $("#delete-book", from).submit(function() {
             $.ajax({
                 type: "DELETE",
