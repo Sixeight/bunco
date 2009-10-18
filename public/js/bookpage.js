@@ -19,8 +19,10 @@ $(function() {
             $.ajax({
                 type: "DELETE",
                 url: this.action,
-                success: function() {
-                    $(self.parentNode.parentNode.parentNode).remove();
+                success: function(res) {
+                    if (res == "ok") {
+                        $(self.parentNode.parentNode.parentNode).remove();
+                    }
                 },
                 error: function() {
                     alert("エラーです(エラー処理を実装するよう管理者に頼んでください)");

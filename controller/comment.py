@@ -46,6 +46,7 @@ class CommentPage(webapp.RequestHandler):
 
     def delete(self, key):
         comment = Comment.get(db.Key(key))
-        if comment:
+        user = users.get_current_user()
+        if comment and user and user == comment.author:
             comment.delete()
-        return
+            self.response.out.write("ok")
