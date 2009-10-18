@@ -40,6 +40,14 @@
               <td>Created_at</td>
               <td>{{ book.created_at|escape}}</td>
             </tr>
+            <tr>
+              <td>冊数</td>
+              <td>{{ book.statuses.count }}</td>
+            </tr>
+            <tr>
+              <td>在庫数</td>
+              <td>{{ book.stock_number }}</td>
+            </tr>
           </table>
         </td>
       </tr>
