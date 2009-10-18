@@ -11,12 +11,20 @@ class Stock(db.Model):
     book = db.ReferenceProperty(Book,
         required=True, collection_name='stocks')
     owner = db.UserProperty(auto_current_user_add=True)
+    holder = db.UserProperty()
     status = db.StringProperty(required=True, choices=set(STATUS.keys()), default='available')
     created_at = db.DateTimeProperty(auto_now_add=True)
     updated_at = db.DateTimeProperty(auto_now=True)
 
     def lent(self):
         self.status = 'occupied'
+        self.holder = users.get_current_user()
+        self.put()
+        return self
+
+    def back(self):
+        self.status = 'available'
+        self.holder = None
         self.put()
         return self
 

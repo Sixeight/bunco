@@ -1,8 +1,10 @@
 
 from google.appengine.ext import db
 from google.appengine.api import urlfetch
+from google.appengine.api import users
 import yaml
 from datetime import date
+import logging
 
 class CantBuildBook(Exception):
      def __init__(self, value):
@@ -63,6 +65,23 @@ class Book(db.Model):
             raise CantBuildBook, e.value
         except Exception:
             raise CantBuildBook, 'Unknown Error'
+
+    def is_holder(self):
+        return users.get_current_user() in [stock.holder for stock in self.stocks]
+
+    def holding(self):
+        holder = [stock for stock in self.stocks if stock.holder == users.get_current_user()]
+        if len(holder) == 0:
+            return None
+        return holder[0]
+
+    def lent_or_return(self):
+        if self.is_holder():
+            self.holding().back()
+            return
+        if self.available_stocks().count() > 0:
+            self.available_stocks().fetch(1)[0].lent()
+        return
 
     def available_stocks(self):
          return self.stocks.filter('status = ', 'available')

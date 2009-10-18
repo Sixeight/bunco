@@ -47,20 +47,31 @@
               </td>
             </tr>
             <tr>
-              <td>冊数</td>
-              <td>{{ book.stocks.count }}</td>
-            </tr>
-            <tr>
               <td>在庫数</td>
+              {% ifequal 0 book.occupied_stocks.count %}
               <td>{{ book.available_stocks.count }}</td>
+              {% else %}
+              <td>
+                {{ book.available_stocks.count }}/{{ book.stocks.count }}
+                (
+                {% for stock in book.occupied_stocks %}
+                {% if forloop.last %}
+                {{ stock.holder }}
+                {% else %}
+                {{ stock.holder }},
+                {% endif %}
+                {% endfor %}
+                )
+              </td>
+              {% endifequal %}
             </tr>
           </table>
         </td>
       </tr>
     </table>
-    <h2>借りる</h2>
+    <h2>貸し借り</h2>
     <form action="{{ book.path|escape}}" method="POST" id="lent-book">
-      <input type="submit" value="借りる" />
+      <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
     </form>
     <h2>Comment</h2>
     <ul class="comments">

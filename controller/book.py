@@ -59,12 +59,14 @@ class BookPage(webapp.RequestHandler):
         self.redirect(book.path())
 
     def put(self, key):
+        if not users.get_current_user():
+            self.response.out.write("deny")
+            return
         book = Book.get_by_key_name("Book_" + key)
         if not book:
             self.response.out.write("ng")
             return
-        if book.available_stocks().count() > 0:
-            book.available_stocks().fetch(1000).pop().lent()
+        book.lent_or_return()
         return
 
 
@@ -72,6 +74,7 @@ class BookPage(webapp.RequestHandler):
         book = Book.get_by_key_name("Book_" + key)
         if book:
             for comment in book.comments: comment.delete()
+            for stock in book.stocks: stock.delete()
             book.delete()
         self.response.out.write("ok")
         return
