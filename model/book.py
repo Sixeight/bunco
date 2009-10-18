@@ -21,6 +21,15 @@ class Book(db.Model):
     def path(self):
         return "/book/" + self.isbn
 
+    def image_path(self, size = 'M'):
+        return 'http://images-jp.amazon.com/images/P/' + self.isbn + '.09._SC' + size + 'ZZZZZZ_PA30,0,0,30_SY300_.jpg'
+
+    def large_image_path(self):
+        return self.image_path('L')
+
+    def amazon_path(self):
+        return 'http://amazon.jp/dp/' + self.isbn
+
     def build_from_isbn(self):
         url = 'http://api.dan.co.jp/asin/' + self.isbn + '.yml'
         result = urlfetch.fetch(url)

@@ -10,9 +10,7 @@
       {% for book in books %}
       <tr>
         <td>
-          <a href="http://amazon.jp/dp/{{ book.isbn }}">
-            <img src="http://images-jp.amazon.com/images/P/{{ book.isbn }}.09._SCLMZZZZZZ_PA30,0,0,30_SY300_.jpg" />
-          </a>
+          <a href="{{ book.amazon_path }}"><img src="{{ book.image_path }}" /></a>
         </td>
         <td>
           <table>
