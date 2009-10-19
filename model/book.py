@@ -43,7 +43,10 @@ class Book(db.Model):
             info = yaml.load(result.content)['ItemAttributes']
 
             if info.has_key('Author'):
-                self.author = info['Author']
+                authors = info['Author']
+                if authors.__class__ == list:
+                    authors = ', '.join(authors)
+                self.author = authors
             elif info.has_key('Creator'):
                 creators = []
                 for person in info['Creator']:
