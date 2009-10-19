@@ -30,7 +30,7 @@
     </table>
 
     {% if user %}
-    <h1>本を追加</h1>
+    <h2>本を追加</h2>
     <form action="/book" method="POST">
       <table>
         <tr><th>ISBN</th><td><input type="text" name="isbn"></td></tr>
@@ -38,6 +38,10 @@
       <!-- <p>published_at <input type="text" name="published_at"></p> -->
       <p><input type="submit" value="追加"></p>
     </form>
+    {% else %}
+    <h2>本を追加しましょう</h2>
+    <p>ログインして本を追加しましょう．</p>
+    {{greeting}}
     {% endif %}
   </body>
 </html>
