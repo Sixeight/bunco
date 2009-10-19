@@ -9,6 +9,7 @@ from google.appengine.ext.webapp import template
 import logging
 import datetime
 from model.book import CantBuildBook
+import re
 
 class BookPage(webapp.RequestHandler):
     def get(self, key):
@@ -48,9 +49,14 @@ class BookPage(webapp.RequestHandler):
         # FIXME: need exception
         if not users.get_current_user():
             return
+        # FIXME: very dirty
+        isbn = self.request.get('isbn')
+        r = re.compile('http://[^\d]+/(\d+)/.*')
+        if r.match(isbn):
+            isbn = r.match(isbn).group(1)
         book = Book(
-            key_name = "Book_" + self.request.get('isbn'),
-            isbn = self.request.get('isbn'),
+            key_name = "Book_" + isbn,
+            isbn = isbn
             )
         try:
             book.build_from_isbn()

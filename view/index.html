@@ -14,10 +14,9 @@
     {% if user %}
     <h2>本を追加</h2>
     <form action="/book" method="POST">
-      <table>
-        <tr><th>ISBN</th><td><input type="text" name="isbn"></td></tr>
-      </table>
-      <p><input type="submit" value="追加"></p>
+      <label for="isbn">ISBN or Amazon URL:</label>
+      <input type="text" name="isbn" id="isbn">
+      <input type="submit" value="追加">
     </form>
     {% else %}
     <h2>本を追加しましょう</h2>
