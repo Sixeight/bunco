@@ -51,7 +51,7 @@ class BookPage(webapp.RequestHandler):
             return
         # FIXME: very dirty
         isbn = self.request.get('isbn')
-        r = re.compile('http://[^\d]+/(\d+)/.*')
+        r = re.compile('http://[^\d]+/(([X\d])+)/?.*')
         if r.match(isbn):
             isbn = r.match(isbn).group(1)
         book = Book(
