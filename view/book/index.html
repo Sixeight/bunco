@@ -35,11 +35,11 @@
             <tr>
               <td>提供者</td>
               <td>
-                <ul>
+                <table>
                   {% for stock in book.stocks %}
-                  <li>{{stock.owner}} at {{stock.created_at}}</li>
+                  <tr><td>{{stock.owner}}</td></tr>
                   {% endfor %}
-                </ul>
+                </table>
               </td>
             </tr>
             <tr>
