@@ -24,11 +24,16 @@
     {{greeting}}
     {% endif %}
     <table>
-      {% for book in books %}
+      {% for group in books %}
       <tr class="book">
+        {% for book in group %}
         <td>
-          <a href="{{ book.path }}"><img src="{{ book.image_path }}" /></a>
+          <a href="{{ book.path }}"><img src="{{ book.image_path }}" name="{{ book.title}}" title="{{ book.title }}" /></a>
         </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+        <!--
         <td>
           <table>
             <tr><td><span class="title"><a href="{{ book.path }}">{{ book.title }}</a></span></td></tr>
@@ -37,8 +42,7 @@
             <tr><td>{{ book.published_at }}</td></tr>
           </table>
         </td>
-      </tr>
-      {% endfor %}
+        -->
     </table>
   </body>
 </html>

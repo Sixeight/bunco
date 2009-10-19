@@ -92,3 +92,17 @@ class Book(db.Model):
     def occupied_stocks(self):
          return self.stocks.filter('status = ', 'occupied')
 
+    # FIXME: need more beautiful implement
+    @classmethod
+    def grouping(cls, length):
+        books = Book.all().order('-created_at').fetch(1000)
+        result = []
+        tmp = []
+        for i, book in enumerate(books):
+            if i % 5 == 0:
+                result.append(tmp)
+                tmp = []
+            tmp.append(book)
+        result.append(tmp)
+        return result
+
