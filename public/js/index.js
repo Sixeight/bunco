@@ -8,3 +8,11 @@ Hatena.Star.SiteConfig = {
         }
     }
 };
+
+
+$(function() {
+      $("#index .newbook .trigger").click(function() {
+          $(this).remove();
+          $(".form", $(this).parent().get(0)).show();
+      });
+});

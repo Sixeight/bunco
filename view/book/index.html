@@ -7,90 +7,97 @@
     <script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
     <script type="text/javascript" src="/js/bookpage.js" ></script>
   </head>
-  <body>
-    {{greeting}}
+  <body id="book">
+    <div id="global-whole">
+      <div id="global-header">
+        <p class="greeting">{{greeting}}</p>
+        <h1>{{ book.title|escape}}</h1>
+      </div>
+      <div id="global-content">
+        <table>
+          <tr>
+            <td><img src="{{ book.large_image_path }}" /></td>
+            <td>
+              <table>
+                <tr>
+                  <td>ISBN</td>
+                  <td>{{ book.isbn|escape}}</td>
+                </tr>
+                <tr>
+                  <td>Author</td>
+                  <td>{{ book.author|escape}}</td>
+                </tr>
+                <tr>
+                  <td>Publisher</td>
+                  <td>{{ book.publisher|escape}}</td>
+                </tr>
+                <tr>
+                  <td>Published_at</td>
+                  <td>{{ book.published_at|escape}}</td>
+                </tr>
+                <tr>
+                  <td>提供者</td>
+                  <td>
+                    <table>
+                      {% for stock in book.stocks %}
+                      <tr><td>{{stock.owner}}</td></tr>
+                      {% endfor %}
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>在庫</td>
+                  {% ifequal 0 book.occupied_stocks.count %}
+                  <td>{{ book.available_stocks.count }}</td>
+                  {% else %}
+                  <td>
+                    {{ book.available_stocks.count }}/{{ book.stocks.count }}
+                    (
+                    {% for stock in book.occupied_stocks %}
+                    {% if forloop.last %}
+                    {{ stock.holder }}
+                    {% else %}
+                    {{ stock.holder }},
+                    {% endif %}
+                    {% endfor %}
+                    )
+                  </td>
+                  {% endifequal %}
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
+        <h2>貸し借り</h2>
+        <form action="{{ book.path|escape}}" method="POST" id="lent-book">
+          <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
+        </form>
+        <h2>Comment</h2>
+        <ul class="comments">
+          {% for comment in book.comments %}
+          <li>
+            {% include "../comment/index.html" %}
+          </li>
+          {% endfor %}
+        </ul>
 
-    <h1>{{ book.title|escape}}</h1>
-    <table>
-      <tr>
-        <td><img src="{{ book.large_image_path }}" /></td>
-        <td>
-          <table>
-            <tr>
-              <td>ISBN</td>
-              <td>{{ book.isbn|escape}}</td>
-            </tr>
-            <tr>
-              <td>Author</td>
-              <td>{{ book.author|escape}}</td>
-            </tr>
-            <tr>
-              <td>Publisher</td>
-              <td>{{ book.publisher|escape}}</td>
-            </tr>
-            <tr>
-              <td>Published_at</td>
-              <td>{{ book.published_at|escape}}</td>
-            </tr>
-            <tr>
-              <td>提供者</td>
-              <td>
-                <table>
-                  {% for stock in book.stocks %}
-                  <tr><td>{{stock.owner}}</td></tr>
-                  {% endfor %}
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>在庫</td>
-              {% ifequal 0 book.occupied_stocks.count %}
-              <td>{{ book.available_stocks.count }}</td>
-              {% else %}
-              <td>
-                {{ book.available_stocks.count }}/{{ book.stocks.count }}
-                (
-                {% for stock in book.occupied_stocks %}
-                {% if forloop.last %}
-                {{ stock.holder }}
-                {% else %}
-                {{ stock.holder }},
-                {% endif %}
-                {% endfor %}
-                )
-              </td>
-              {% endifequal %}
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-    <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
-    <h2>貸し借り</h2>
-    <form action="{{ book.path|escape}}" method="POST" id="lent-book">
-      <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
-    </form>
-    <h2>Comment</h2>
-    <ul class="comments">
-      {% for comment in book.comments %}
-      <li>
-        {% include "../comment/index.html" %}
-      </li>
-      {% endfor %}
-    </ul>
+        <form action="/comment" method="POST" class="post-comment">
+          <textarea name="body"></textarea>
+          <input type="hidden" name="book" value="{{book.isbn|escape}}" />
+          <input type="submit" value="Post" class="submit"/>
+        </form>
 
-    <form action="/comment" method="POST" class="post-comment">
-      <textarea name="body"></textarea>
-      <input type="hidden" name="book" value="{{book.isbn|escape}}" />
-      <input type="submit" value="Post" class="submit"/>
-    </form>
-
-    {% if user %}
-    <h2>Delete</h2>
-    <form action="{{ book.path|escape}}" method="POST" id="delete-book">
-      <input type="submit" value="delete this book" />
-    </form>
-    {% endif %}
-    <a href="/" >index</a>
+        {% if user %}
+        <h2>Delete</h2>
+        <form action="{{ book.path|escape}}" method="POST" id="delete-book">
+          <input type="submit" value="delete this book" />
+        </form>
+        {% endif %}
+      </div>
+      <div id="global-footer">
+        <a href="/" >Bunco</a>
+      </div>
+    </div>
   </body>
 </html>

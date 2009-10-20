@@ -2,48 +2,62 @@
 <html>
   <head>
     <title>Bunco</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <link rel="stylesheet" href="/css/application.css" />
+    <script type="text/javascript" src="/js/jquery.js" ></script>
     <script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
     <script type="text/javascript" src="/js/index.js" ></script>
 
   </head>
-  <body>
-    {{greeting}}
-    <h1>Bunco</h1>
-    <p>Buncoは町家文庫です．</p>
-    {% if user %}
-    <h2>本を追加</h2>
-    <form action="/book" method="POST">
-      <label for="isbn">ISBN or Amazon URL:</label>
-      <input type="text" name="isbn" id="isbn">
-      <input type="submit" value="追加">
-    </form>
-    {% else %}
-    <h2>本を追加しましょう</h2>
-    <p>ログインして本を追加しましょう．</p>
-    {{greeting}}
-    {% endif %}
-    <table>
-      {% for group in books %}
-      <tr class="book">
-        {% for book in group %}
-        <td>
-          <a href="{{ book.path }}"><img src="{{ book.image_path }}" name="{{ book.title}}" title="{{ book.title }}" /></a>
-        </td>
-        {% endfor %}
-      </tr>
-      {% endfor %}
-        <!--
-        <td>
-          <table>
-            <tr><td><span class="title"><a href="{{ book.path }}">{{ book.title }}</a></span></td></tr>
-            <tr><td>{{ book.author }}</td></tr>
-            <tr><td>{{ book.publisher }}</td></tr>
-            <tr><td>{{ book.published_at }}</td></tr>
-          </table>
-        </td>
-        -->
-    </table>
+  <body id="index">
+    <div id="global-whole">
+      <div id="global-header">
+        <p class="greeting">{{greeting}}</p>
+        <h1>Bunco</h1>
+      </div>
+      <div id="global-content">
+        <div class="bookshelf">
+          <ul class="books">
+            {% for book in books %}
+            <li>
+              <div class="book">
+                <div class="label">
+                  <a href="{{ book.path }}"><img class="jacket" src="{{ book.image_path }}" name="{{ book.title}}"/></a>
+                </div>
+                <div class="about">
+                  <div class="info title">{{ book.title }} </div>
+                  <div class="info">{{ book.author }}</div>
+                  <div class="info">{{ book.published_at }}</div>
+                  <div class="jacket"><img src="{{ book.image_path }}" name="{{ book.title}}" /></div>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+            {% if user %}
+            <li>
+              <div class="newbook">
+                <div class="trigger">
+                  <span class="plus">
+                    new
+                  </span>
+                </div>
+                <div class="form" style="display: none">
+                  <form action="/book" method="POST">
+                    <label for="isbn">ISBN or Amazon URL:</label>
+                    <input type="text" name="isbn" id="isbn">
+                    <input type="submit" value="new">
+                  </form>
+                </div>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div id="global-footer">
+        <a href="/" >Bunco</a>
+      </div>
+    </div>
   </body>
 </html>
 

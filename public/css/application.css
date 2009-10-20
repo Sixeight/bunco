@@ -1,6 +1,120 @@
-
-table td {
-  padding: 0; }
+/* common */
+td {
+    padding: 0;
+}
 img {
-  border: 0; }
+    border: 0;
+}
+body, div, span, h1 {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    background: #444;
+}
 
+/* global */
+#global-whole {
+    background: #fff;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+    
+}
+
+#global-header {
+    padding-top: 30px;
+    border-bottom: solid 1px;
+}
+#global-content {
+//    padding-top: 10px;
+    border-bottom: solid 1px;
+}
+#global-footer {
+    display: none;              /*XXX*/
+    padding-top: 10px;
+}
+#global-header .greeting {
+    float: right;
+}
+
+/* index */
+#index .bookshelf {
+    padding: 2px 30px;
+    background: #811;
+}
+#index .books {
+    padding: 0px;
+    margin: 0px;
+}
+#index li {
+    display: inline-block;
+}
+#index .book, #index .newbook{
+    float: left;
+    display: inline-block;
+    width: 30px;
+    height: 120px;
+}
+#index .newbook{
+    width: 60px;
+}
+#index .book .label, #index .newbook .trigger {
+    display: inline-block;
+    width: 30px;
+    height: 120px;
+    overflow: hidden;
+    background: #fff;
+}
+#index .newbook .trigger {
+    width: 60px;
+}
+#index .book .label .jacket {
+    position: relative;
+    top: -30px;
+    left: -40px;
+}
+#index .book .about {
+    display: none;
+}
+#index div.book:hover .about {
+    float: none;
+    clear: none;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    left: 30px;
+    width: 180px;
+    z-index: 100;
+    border: solid 1px;
+    background: #fff;
+}
+#index .book .about .info {
+    font-size: 10px;
+    margin-top: 4px;
+}
+#index .book .about .jacket {
+    margin: 0 auto 0 auto;
+}
+#index . {
+    width: 30px;
+    height: 120px;
+}
+#index .newbook .trigger {
+    display: inline-block;
+    cursor: pointer;
+}
+#index .newbook .trigger .plus{
+    position: relative;
+    top: 45px;
+    left: 2px;
+    font-size: 30px;
+    color: #000;
+    font-family: sans-serif;
+}
+#index .newbook .form {
+    display: inline-block;
+    width: 240px;
+    height: 120px;
+    background: #fff;
+}
