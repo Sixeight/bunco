@@ -31,7 +31,6 @@ body {
     border-bottom: solid 1px;
 }
 #global-footer {
-    display: none;              /*XXX*/
     padding-top: 10px;
 }
 #global-header .greeting {
