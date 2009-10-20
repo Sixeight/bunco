@@ -69,10 +69,12 @@
           </tr>
         </table>
         <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
+        {% if user %}
         <h2>貸し借り</h2>
         <form action="{{ book.path|escape}}" method="POST" id="lent-book">
           <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
         </form>
+        {% endif %}
         <h2>Comment</h2>
         <ul class="comments">
           {% for comment in book.comments %}
