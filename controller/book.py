@@ -22,10 +22,10 @@ class BookPage(webapp.RequestHandler):
 
         user = users.get_current_user()
         if user:
-            greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
-                        (user.nickname(), users.create_logout_url("/")))
+            greeting = ("<a href=\"%s\">logout %s</a>" %
+                        (users.create_logout_url("/"), user.nickname()))
         else:
-            greeting = ("<a href=\"%s\">Sign in or register</a>." %
+            greeting = ("<a href=\"%s\">login</a>" %
                         users.create_login_url("/"))
 
         logging.info("cache not hit()")
