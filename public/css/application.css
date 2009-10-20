@@ -75,6 +75,9 @@ body {
     left: -40px;
 }
 #index .book .about {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 5px 10px;
     display: none;
 }
 #index div.book:hover .about {
@@ -90,11 +93,11 @@ body {
     background: #fff;
 }
 #index .book .about .info {
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 4px;
 }
 #index .book .about .jacket {
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 #index . {
     width: 30px;
