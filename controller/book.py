@@ -13,7 +13,9 @@ import re
 
 class BookPage(webapp.RequestHandler):
     def get(self, key):
-
+        if key == 'add':
+            self.post()
+            return
         # result = memcache.get("index")
         result = False
         if result:
