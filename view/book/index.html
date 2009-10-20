@@ -85,7 +85,7 @@
         </ul>
 
         <form action="/comment" method="POST" class="post-comment">
-          <textarea name="body"></textarea>
+          <textarea name="body" rows="5" cols="30"></textarea>
           <input type="hidden" name="book" value="{{book.isbn|escape}}" />
           <input type="submit" value="Post" class="submit"/>
         </form>
