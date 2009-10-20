@@ -32,6 +32,7 @@ class BookPage(webapp.RequestHandler):
 
         logging.info("cache not hit()")
         book = Book.get_by_key_name("Book_" + key)
+        template_values = None
         if book:
             template_values = {
                 'user': user,
