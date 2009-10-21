@@ -81,10 +81,10 @@ class Book(db.Model):
     def lent_or_return(self):
         if self.is_holder():
             self.holding().back()
-            return
+            return 'back'
         if self.available_stocks().count() > 0:
             self.available_stocks().fetch(1)[0].lent()
-        return
+        return 'lent'
 
     def available_stocks(self):
          return self.stocks.filter('status = ', 'available')

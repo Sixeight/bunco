@@ -1,6 +1,7 @@
 
 from google.appengine.ext import webapp
 from model.book import Book
+from model.activity import Activity
 # from google.appengine.api import memcache
 import os
 from google.appengine.ext.webapp import template
@@ -25,6 +26,7 @@ class IndexPage(webapp.RequestHandler):
             template_values = {
                 'greeting': greeting,
                 'user': user,
+                'activities': Activity.all().order('-created_at').fetch(10),
                 'books': Book.all().order('-created_at').fetch(1000),
                 }
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'index.html')

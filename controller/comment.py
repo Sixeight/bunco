@@ -2,6 +2,7 @@ from google.appengine.api import users
 from google.appengine.ext import webapp, db
 from model.book import Book
 from model.comment import Comment
+from model.activity import Activity
 # from google.appengine.api import memcache
 import os
 from google.appengine.ext.webapp import template
@@ -32,6 +33,7 @@ class CommentPage(webapp.RequestHandler):
             body = body
             )
         comment.put()
+        Activity(type='comment', book=book).put()
         user = users.get_current_user()
         template_values = {
             'comment': comment,
@@ -40,7 +42,7 @@ class CommentPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), '..', 'view', 'comment/index.html')
         result = template.render(path, template_values)
         self.response.out.write(result)
-    
+
     def put(self, id):
         return
 

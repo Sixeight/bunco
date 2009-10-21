@@ -2,6 +2,7 @@
 from google.appengine.ext import webapp
 from model.book import Book
 from model.stock import Stock
+from model.activity import Activity
 # from google.appengine.api import memcache
 from google.appengine.api import users
 import os
@@ -68,6 +69,7 @@ class BookPage(webapp.RequestHandler):
             return
         book.put()
         Stock(book=book).put()
+        Activity(type='add', book=book).put()
         self.redirect(book.path())
 
     def put(self, key):
@@ -78,7 +80,8 @@ class BookPage(webapp.RequestHandler):
         if not book:
             self.response.out.write("ng")
             return
-        book.lent_or_return()
+        type = book.lent_or_return()
+        Activity(type=type, book=book).put()
         return
 
 
@@ -91,6 +94,7 @@ class BookPage(webapp.RequestHandler):
             for comment in book.comments: comment.delete()
             for stock in book.stocks: stock.delete()
             book.delete()
+        Activity(type='delete', book=book).put()
         self.response.out.write("ok")
         return
 
