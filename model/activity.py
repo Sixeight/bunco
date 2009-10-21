@@ -19,7 +19,11 @@ class Activity(db.Model):
     created_at = db.DateTimeProperty(auto_now_add = True)
 
     def __repr__(self):
-        return self.user.nickname() + \
+        if self.user == None:
+            nickname = u'Anonymous'
+        else:
+            nickname = self.user.nickname()
+        return nickname             + \
                    u'さんが「'      + \
                    u'<a href="'     + \
                    self.book.path() + \
