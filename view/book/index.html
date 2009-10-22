@@ -11,32 +11,33 @@
     <div id="global-whole">
       <div id="global-header">
         <p class="greeting">{{greeting}}</p>
-        <h1>{{ book.title|escape}}</h1>
+        <h1>Bunco</h1>
       </div>
       <div id="global-content">
+        <h2>{{ book.title|escape}}</h2>
         <table>
           <tr>
             <td><img src="{{ book.large_image_with_shadow_path }}" /></td>
             <td>
-              <table>
+              <table class="book_info">
                 <tr>
-                  <td>ISBN</td>
+                  <th>ISBN</th>
                   <td>{{ book.isbn|escape}}</td>
                 </tr>
                 <tr>
-                  <td>Author</td>
+                  <th>著者</th>
                   <td>{{ book.author|escape}}</td>
                 </tr>
                 <tr>
-                  <td>Publisher</td>
+                  <th>出版社</th>
                   <td>{{ book.publisher|escape}}</td>
                 </tr>
                 <tr>
-                  <td>Published_at</td>
+                  <th>発売日</th>
                   <td>{{ book.published_at|escape}}</td>
                 </tr>
                 <tr>
-                  <td>提供者</td>
+                  <th>提供者</th>
                   <td>
                     <table>
                       {% for stock in book.stocks %}
@@ -46,7 +47,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>在庫</td>
+                  <th>在庫</th>
                   {% ifequal 0 book.occupied_stocks.count %}
                   <td>{{ book.available_stocks.count }}</td>
                   {% else %}
@@ -65,17 +66,17 @@
                   {% endifequal %}
                 </tr>
               </table>
+              <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
             </td>
           </tr>
         </table>
-        <p><a href="{{ book.amazon_path }}">Amazonで詳細を見る</a></p>
         {% if user %}
-        <h2>貸し借り</h2>
+        <h3>貸し借り</h3>
         <form action="{{ book.path|escape}}" method="POST" id="lent-book">
           <input type="submit" value="{% if book.is_holder %}返す{% else %}借りる{% endif %}" />
         </form>
         {% endif %}
-        <h2>Comment</h2>
+        <h3>Comment</h3>
         <ul class="comments">
           {% for comment in book.comments %}
           <li>
@@ -91,14 +92,14 @@
         </form>
 
         {% if user %}
-        <h2>Delete</h2>
+        <h3>Delete</h3>
         <form action="{{ book.path|escape}}" method="POST" id="delete-book">
           <input type="submit" value="delete this book" />
         </form>
         {% endif %}
       </div>
       <div id="global-footer">
-        <a href="/" >Bunco</a>
+        <a href="/" >Index</a>
       </div>
     </div>
   </body>

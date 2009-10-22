@@ -81,7 +81,7 @@ Hatena.Star.SiteConfig = {
             title: 'span.username',
             container: 'span.header'
         },
-        'h1': {
+        'h2': {
             uri: 'window.location',
             title: 'parent',
             container: 'parent'
