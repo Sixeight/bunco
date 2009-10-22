@@ -120,7 +120,7 @@ body {
     height: 120px;
     background: #fff;
 }
-#index #activity li {
+#index .activities li {
     margin: 2px 0;
     padding-left: 10px;
     font-size: small;
