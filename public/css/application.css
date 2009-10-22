@@ -57,7 +57,7 @@ body {
     float: left;
     display: inline-block;
     width: 30px;
-    height: 120px;
+    height: 110px;
 }
 #index .newbook{
     width: 60px;
@@ -65,7 +65,7 @@ body {
 #index .book .label, #index .newbook .trigger {
     display: inline-block;
     width: 30px;
-    height: 120px;
+    height: 110px;
     overflow: hidden;
     background: #fff;
 }
@@ -74,8 +74,7 @@ body {
 }
 #index .book .label .jacket {
     position: relative;
-    top: -30px;
-    left: -40px;
+    left: -25px;
 }
 #index .book .about {
     -moz-border-radius: 10px;
@@ -104,7 +103,7 @@ body {
 }
 #index . {
     width: 30px;
-    height: 120px;
+    height: 110px;
 }
 #index .newbook .trigger {
     display: inline-block;
@@ -121,7 +120,7 @@ body {
 #index .newbook .form {
     display: inline-block;
     width: 240px;
-    height: 120px;
+    height: 110px;
     background: #fff;
 }
 #index .activities li {

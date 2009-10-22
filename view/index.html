@@ -22,13 +22,13 @@
             <li>
               <div class="book">
                 <div class="label">
-                  <a href="{{ book.path }}"><img class="jacket" src="{{ book.image_path }}" name="{{ book.title}}"/></a>
+                  <a href="{{ book.path }}"><img class="jacket" src="{{ book.small_image_path }}" name="{{ book.title}}"/></a>
                 </div>
                 <div class="about">
                   <div class="info title">{{ book.title }} </div>
                   <div class="info">{{ book.author }}</div>
                   <div class="info">{{ book.published_at }}</div>
-                  <div class="jacket"><img src="{{ book.image_path }}" name="{{ book.title}}" /></div>
+                  <div class="jacket"><img src="{{ book.image_with_shadow_path }}" name="{{ book.title}}" /></div>
                 </div>
               </div>
             </li>
