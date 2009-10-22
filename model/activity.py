@@ -18,16 +18,6 @@ class Activity(db.Model):
     user = db.UserProperty(auto_current_user_add=True)
     created_at = db.DateTimeProperty(auto_now_add = True)
 
-    def __repr__(self):
-        return self.user.nickname() + \
-                   u'さんが「'      + \
-                   u'<a href="'     + \
-                   self.book.path() + \
-                   u'">'            + \
-                   self.book.title  + \
-                   u'</a>」'        + \
-                   TYPE[self.type]
-
     def action(self):
         return TYPE[self.type]
 
