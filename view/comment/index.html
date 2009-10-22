@@ -8,11 +8,9 @@
     </a>
 
   </span>
-  <pre>
-    {% for line in comment.each_line_body %}
-    {{ line|escape}}
-    {% endfor %}
-  </pre>
+  <span>
+    {{ comment.body|linebreaks}}
+  </span>
   {% if user %}
   {% ifequal user comment.author %}
   <span>
