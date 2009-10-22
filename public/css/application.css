@@ -50,7 +50,7 @@ body {
     padding: 0px;
     margin: 0px;
 }
-#index li {
+#index .books li {
     display: inline-block;
 }
 #index .book, #index .newbook{
@@ -86,7 +86,7 @@ body {
     top: 0px;
     left: 30px;
     width: 180px;
-    z-index: 100;
+    z-index: 10;
     border: solid 1px;
     background: #fff;
 }
