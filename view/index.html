@@ -54,12 +54,12 @@
             {% endif %}
           </ul>
         </div>
-        <div id='activities'>
+        <div class="activities">
           <ul>
             {% for activity in activities %}
             <li class="activity">
               <div class="title">{% if activity.user %}<a href="/user/{{ activity.user.nickname }}">{{ activity.user.nickname|escape}}</a>{% else %}匿名{% endif %}さんが<a href="{{activity.book.path}}">{{activity.book.title}}</a>{{activity.action}}</div>
-              <div style="display:none" class="key">{{activity.key}}</div>
+              <a class="hidden-key" href="{{activity.path}}"></a>
             </li>
             {% endfor %}
           </ul>

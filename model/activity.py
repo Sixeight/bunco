@@ -30,3 +30,6 @@ class Activity(db.Model):
 
     def action(self):
         return TYPE[self.type]
+
+    def path(self):
+        return "/activity/" +  str(self.key())

@@ -37,6 +37,10 @@ body {
     float: right;
 }
 
+.hidden-key {
+    display: none;
+}
+
 /* index */
 #index .bookshelf {
     padding: 2px 30px;
