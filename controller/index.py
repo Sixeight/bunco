@@ -16,8 +16,8 @@ class IndexPage(webapp.RequestHandler):
             logging.info("cache not hit(index)")
             user = users.get_current_user()
             if user:
-                greeting = ("<a href=\"%s\">logout %s</a>" %
-                            (users.create_logout_url("/"), user.nickname()))
+                greeting = ("%s : <a href=\"%s\">logout</a>" %
+                            (user.nickname(), users.create_logout_url("/")))
             else:
                 greeting = ("<a href=\"%s\">login</a>" %
                             users.create_login_url("/"))
