@@ -22,12 +22,25 @@ class Book(db.Model):
 
     def path(self):
         return "/book/" + self.isbn
+    
+    def image_path(self, size = 'M', shadow = False, rest=''):
+        if shadow:
+            shadow = 'PA30,0,0,30_'
+        else:
+            shadow = ''
+        return 'http://images-jp.amazon.com/images/P/' + self.isbn + '.09._SC' + size + 'ZZZZZZ_' + shadow + rest + '.jpg'
 
-    def image_path(self, size = 'M'):
-        return 'http://images-jp.amazon.com/images/P/' + self.isbn + '.09._SC' + size + 'ZZZZZZ_PA30,0,0,30_SY300_.jpg'
-
-    def large_image_path(self):
-        return self.image_path('L')
+    def image_with_shadow_path(self):
+        return self.image_path('M', True)
+    
+    def small_image_path(self):
+        return self.image_path('T', False)
+    
+    def jacket_image_path(self):
+        return self.image_path('T', False, 'CR20,0,30,110_')
+    
+    def large_image_with_shadow_path(self):
+        return self.image_path('L', True)
 
     def amazon_path(self):
         return 'http://amazon.jp/dp/' + self.isbn

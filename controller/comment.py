@@ -11,7 +11,10 @@ import datetime
  
 class CommentPage(webapp.RequestHandler):
     def get(self, key):
-        comment = Comment.get(db.Key(key))
+        try:
+            comment = Comment.get(db.Key(key))
+        except(Exception):
+            comment = None
         if comment:
             template_values = {
                 'comment': comment,
@@ -20,7 +23,7 @@ class CommentPage(webapp.RequestHandler):
             result = template.render(path, template_values)
         else:
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'comment/not_found.html')
-            result = template.render(path, template_values)
+            result = template.render(path, {})
         self.response.out.write(result)
 
     def post(self):
