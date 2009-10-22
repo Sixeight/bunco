@@ -86,7 +86,7 @@ body {
     top: 0px;
     left: 30px;
     width: 180px;
-    z-index: 10;
+    z-index: 1;
     border: solid 1px;
     background: #fff;
 }
