@@ -5,6 +5,7 @@ from google.appengine.api import users
 import yaml
 from datetime import date
 import logging
+import re
 
 class CantBuildBook(Exception):
      def __init__(self, value):
@@ -22,7 +23,7 @@ class Book(db.Model):
 
     def path(self):
         return "/book/" + self.isbn
-    
+
     def image_path(self, size = 'M', shadow = False, rest=''):
         if shadow:
             shadow = 'PA30,0,0,30_'
@@ -32,13 +33,13 @@ class Book(db.Model):
 
     def image_with_shadow_path(self):
         return self.image_path('M', True)
-    
+
     def small_image_path(self):
         return self.image_path('T', False)
-    
+
     def jacket_image_path(self):
         return self.image_path('T', False, 'CR20,0,30,110_')
-    
+
     def large_image_with_shadow_path(self):
         return self.image_path('L', True)
 
@@ -104,4 +105,11 @@ class Book(db.Model):
 
     def occupied_stocks(self):
          return self.stocks.filter('status = ', 'occupied')
+
+    @classmethod
+    def create_from_isbn(self, isbn):
+        r = re.compile('http://[^\d]+/(([X\d])+)/?.*')
+        if r.match(isbn):
+            isbn = r.match(isbn).group(1)
+        return Book(key_name = "Book_" + isbn, isbn = isbn)
 
