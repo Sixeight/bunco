@@ -55,19 +55,23 @@
           </ul>
         </div>
         <div class="activities">
-          <ul>
+          <table>
             {% for activity in activities %}
-            <li class="activity">
-              <span class="timestamp">{{ activity.created_at|date:"Y-m-d H:i"}}</span>
-              <div class="title">{% if activity.user %}<a href="/user/{{ activity.user.nickname }}">{{ activity.user.nickname|escape}}</a>{% else %}匿名{% endif %}さんが<a href="{{activity.book.path}}">{{activity.book.title}}</a>{{activity.action}}</div>
-              <a class="hidden-key" href="{{activity.path}}"></a>
-            </li>
+            <tr class="activity">
+              <td><img src="{{ activity.book.image_with_shadow_path }}" width="50"/></td>
+              <td>
+                <div class="title">{% if activity.user %}<a href="/user/{{ activity.user.nickname }}">{{ activity.user.nickname|escape}}</a>{% else %}匿名{% endif %}さんが<a href="{{activity.book.path}}">{{activity.book.title}}</a>{{activity.action}}</div>
+                <span class="timestamp">{{ activity.created_at|date:"Y-m-d H:i"}}</span>
+                <a class="hidden-key" href="{{activity.path}}"></a>
+              </td>
+            </tr>
             {% endfor %}
-          </ul>
+            <tr><td class="right" colspan="2">もっと見る (まだ実装してない)</td></tr>
+          </table>
         </div>
       </div>
       <div id="global-footer" style="display:none">
-        <a href="/" >Bunco</a>
+        <a href="/" >Index</a>
       </div>
     </div>
   </body>

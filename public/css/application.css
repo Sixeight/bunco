@@ -119,11 +119,18 @@ body {
     height: 110px;
     background: #fff;
 }
-#index .activities li {
-    margin: 2px 0;
-    padding-left: 10px;
+#index .activities {
+    width: 100%;
+    margin: 10px 0;
+}
+#index .activities table {
+    width: 100%;
+}
+#index .activities table td {
     font-size: small;
-    border-left: 5px solid #811;
+}
+#index .activities table td.right {
+    text-align: right;
 }
 
 /* book */

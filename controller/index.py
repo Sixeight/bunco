@@ -26,7 +26,7 @@ class IndexPage(webapp.RequestHandler):
             template_values = {
                 'greeting': greeting,
                 'user': user,
-                'activities': Activity.all().order('-created_at').fetch(10),
+                'activities': Activity.all().order('-created_at').fetch(5),
                 'books': Book.all().order('-created_at').fetch(1000),
                 }
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'index.html')
