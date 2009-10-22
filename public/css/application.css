@@ -119,6 +119,9 @@ body {
     height: 110px;
     background: #fff;
 }
+#index .activities ul {
+    list-style-type: none;
+}
 #index .activities li {
     margin: 2px 0;
     padding-left: 10px;
