@@ -72,10 +72,6 @@ body {
 #index .newbook .trigger {
     width: 60px;
 }
-#index .book .label .jacket {
-    position: relative;
-    left: -25px;
-}
 #index .book .about {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
