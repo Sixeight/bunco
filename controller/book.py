@@ -43,6 +43,11 @@ class BookPage(webapp.RequestHandler):
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'book/index.html')
             result = template.render(path, template_values)
         else:
+            template_values = {
+                'user': user,
+                'key':  key,
+                'greeting': greeting,
+                }
             path = os.path.join(os.path.dirname(__file__), '..', 'view', 'book/not_found.html')
             result = template.render(path, template_values)
         # memcache.set("index", result, 600)

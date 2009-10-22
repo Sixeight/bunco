@@ -1,0 +1,23 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Not Found - Bunco</title>
+    <link rel="stylesheet" href="/css/application.css" />
+  </head>
+  <body id="book">
+    <div id="global-whole">
+      <div id="global-header">
+        <p class="greeting">{{greeting}}</p>
+        <h1>Not Found</h1>
+      </div>
+      <div id="global-content">
+        <p>指定された本は登録されていません．</p>
+        {% if user %}
+        <p><a href="/book/add?isbn={{key}}">ここから登録</a></p>
+        {% else %}
+        <p>ログインすると本を登録できます．</p>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
