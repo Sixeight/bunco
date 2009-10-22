@@ -2,7 +2,7 @@
   <span class="header">
     <span class="username{% if comment.is_owner %} owner{% endif %}">{% if comment.author %}{{ comment.author|escape}}{% else %}anonymous{% endif %}</span>
     <span class="timestamp">
-      {{ comment.created_at|escape}}
+      {{ comment.created_at|date:"Y-m-d H:i"}}
     </span>
     <a class="hidden-key" href={{ comment.path }}>
     </a>
