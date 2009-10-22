@@ -28,3 +28,5 @@ class Activity(db.Model):
                    u'</a>」'        + \
                    TYPE[self.type]
 
+    def action(self):
+        return TYPE[self.type]
