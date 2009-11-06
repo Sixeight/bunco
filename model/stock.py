@@ -8,13 +8,13 @@ STATUS = {'available': u'在庫あり',
           'unknown': u'不明'}
 
 class Stock(db.Model):
-    book = db.ReferenceProperty(Book,
-        required=True, collection_name='stocks')
-    owner = db.UserProperty(auto_current_user_add=True)
-    holder = db.UserProperty()
-    status = db.StringProperty(required=True, choices=set(STATUS.keys()), default='available')
-    created_at = db.DateTimeProperty(auto_now_add=True)
-    updated_at = db.DateTimeProperty(auto_now=True)
+    book         = db.ReferenceProperty(Book, required = True, collection_name='stocks')
+    owner        = db.UserProperty(auto_current_user_add=True)
+    holder       = db.UserProperty()
+    status       = db.StringProperty(required=True, choices=set(STATUS.keys()), default='available')
+    created_at   = db.DateTimeProperty(auto_now_add=True)
+    updated_at   = db.DateTimeProperty(auto_now=True)
+    description  = db.StringProperty()
 
     def lent(self):
         self.status = 'occupied'
