@@ -54,7 +54,6 @@ body {
     margin: 0px;
 }
 #index li {
-    border: 1px solid #333;
     background: white;
     padding: 1px;
     display: inline-block;
@@ -69,6 +68,7 @@ body {
     width: 30px;
 }
 #index .book .label, #index .newbook .trigger {
+    border: 1px solid #333;
     display: inline-block;
     width: 30px;
     height: 110px;
@@ -122,8 +122,6 @@ body {
     font-family: sans-serif;
 }
 #index .newbook .form {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     display: inline-block;
     background: #fff;
     border: 1px solid #333;
