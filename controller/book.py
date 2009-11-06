@@ -82,8 +82,19 @@ class BookPage(webapp.RequestHandler):
         if not book:
             self.response.out.write("ng")
             return
-        type = book.lent_or_return()
-        Activity(type=type, book=book).put()
+        if self.request.get('description'):
+            stock = book.mystock()
+            if stock:
+                stock.description = self.request.get('description')
+                stock.put()
+                self.response.out.write(self.request.get('ok'))
+                return
+            else:
+                self.response.out.write('no stock');
+                return
+        else:
+            type = book.lent_or_return()
+            Activity(type=type, book=book).put()
         return
 
 

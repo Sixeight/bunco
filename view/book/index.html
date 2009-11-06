@@ -70,6 +70,20 @@
             </td>
           </tr>
         </table>
+        {% if book.is_owner %}
+        <h3>提供者コメント</h3>
+        {% for stock in book.stocks %}
+        {% if stock.description %}
+        <span>{{ stock.owner}}</span>
+        <span>{{ stock.description|linebreaks}}</span>
+        {% endif %}
+        {% endfor %}
+        <h3>提供者コメント追加</h3>
+        <form action="{{ book.path|escape}}" method="PUT" id="owner-comment">
+          <textarea name="description" rows="5" cols="30"></textarea>
+          <input type="submit" value="Post" class="submit"/>
+        </form>
+        {% endif %}
         {% if user %}
         <h3>貸し借り</h3>
         <form action="{{ book.path|escape}}" method="POST" id="lent-book">

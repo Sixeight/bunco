@@ -86,11 +86,23 @@ class Book(db.Model):
     def is_holder(self):
         return users.get_current_user() in [stock.holder for stock in self.stocks]
 
+    def is_owner(self):
+         return users.get_current_user() and users.get_current_user() in [stock.owner for stock in self.stocks]
+
     def holding(self):
         holder = [stock for stock in self.stocks if stock.holder == users.get_current_user()]
         if len(holder) == 0:
             return None
         return holder[0]
+
+    def mystocks(self):
+         return [stock for stock in self.stocks if stock.owner == users.get_current_user()]
+    
+    def mystock(self):
+         if self.is_owner:
+              return self.mystocks()[0]
+         else:
+              return None
 
     def lent_or_return(self):
         if self.is_holder():
