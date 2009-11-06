@@ -28,6 +28,7 @@
                   <div class="info title">{{ book.title }} </div>
                   <div class="info">{{ book.author }}</div>
                   <div class="info">{{ book.published_at }}</div>
+                  <div class="info">在庫{% ifequal 0 book.available_stocks %}なし{% else %}あり{% endifequal %}</div>
                   <div class="jacket"><img src="{{ book.image_with_shadow_path }}" name="{{ book.title}}" /></div>
                 </div>
               </div>
