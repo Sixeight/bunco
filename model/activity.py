@@ -6,7 +6,7 @@ from model.book import Book
 
 import logging
 
-TYPE = {'add':     u'を提供してくれました',
+TYPE = {'add':     u'を登録しました',
         'delete':  u'を削除しました',
         'lent':    u'を借りました',
         'back':    u'を返しました',
