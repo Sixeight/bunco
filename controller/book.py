@@ -58,16 +58,19 @@ class BookPage(webapp.RequestHandler):
         if not users.get_current_user():
             return
         book = Book.create_from_isbn(self.request.get('isbn'))
-        try:
-            book.build_from_isbn()
-        except CantBuildBook:
-            self.redirect('/')
-            return
-        book.put()
+        if not book.title:
+            try:
+                book.build_from_isbn()
+            except CantBuildBook:
+                self.redirect('/')
+                return
+            book.put()
         
-        stock = Stock(book=book)
-        if self.request.get('owner'): stock.owner = users.User(self.request.get('owner'))
-        stock.put
+        if self.request.get('owner'):
+            owner = users.User(email = self.request.get('owner'))
+        else:
+            owner = users.get_current_user()
+        Stock(book=book, owner=owner).put()
         Activity(type='add', book=book).put()
         self.redirect(book.path())
 

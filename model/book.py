@@ -111,5 +111,5 @@ class Book(db.Model):
         r = re.compile('http://[^\d]+/(([X\d])+)/?.*')
         if r.match(isbn):
             isbn = r.match(isbn).group(1)
-        return Book(key_name = "Book_" + isbn, isbn = isbn)
+        return Book.get_or_insert(key_name = "Book_" + isbn, isbn = isbn)
 
