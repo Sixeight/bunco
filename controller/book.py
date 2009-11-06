@@ -64,7 +64,10 @@ class BookPage(webapp.RequestHandler):
             self.redirect('/')
             return
         book.put()
-        Stock(book=book).put()
+        
+        stock = Stock(book=book)
+        if self.request.get('owner'): stock.owner = users.User(self.request.get('owner'))
+        stock.put
         Activity(type='add', book=book).put()
         self.redirect(book.path())
 
